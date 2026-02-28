@@ -1,13 +1,16 @@
-# inventario.py
+# servicios/inventario.py
 import json
 import os
-from producto import Producto
+from modelos.producto import Producto
 
 class Inventario:
     """Clase que maneja el inventario de productos de la tienda."""
 
-    def __init__(self, archivo="inventario.txt"):
+    def __init__(self, archivo=None):
         self.productos = {}  # Diccionario {id: Producto}
+        if archivo is None:
+            # Definir la ruta absoluta al archivo dentro de la carpeta datos
+            archivo = os.path.join(os.path.dirname(os.path.dirname(__file__)), "datos", "inventario.txt")
         self.archivo = archivo
         self.cargar_archivo()
 
